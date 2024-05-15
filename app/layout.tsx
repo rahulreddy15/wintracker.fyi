@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 
@@ -26,7 +29,19 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        {children}
+        <TooltipProvider
+          disableHoverableContent
+          delayDuration={500}
+          skipDelayDuration={0}
+        >
+          <div className="grid h-screen w-full pl-[56px]">
+            <Sidebar />
+            <div className="flex flex-col">
+              <Header />
+              {children}
+            </div>
+          </div>
+        </TooltipProvider>
       </body>
     </html>
   );
